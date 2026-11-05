@@ -739,3 +739,62 @@ kbd { padding: 3px 6px; border: 1px solid var(--border); border-radius: 5px; col
 .graph-edge.rejected-edge:not(.active) line, .graph-edge.rejected-edge:not(.active) path { stroke: var(--red); stroke-width: 2.5; stroke-dasharray: 5 4; opacity: .85; }
 .legend-line.parent { background: var(--cyan); }
 .legend-line.rejected { background: var(--red); }
+
+/* =================================
+   GRAPH ATLAS - TYPOGRAPHY UPDATE
+================================= */
+
+html {
+  font-size: 17px;
+}
+
+body {
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+/* Main headings */
+h1 {
+  font-size: 2.4rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.8rem;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+/* Paragraphs and general content */
+p,
+li {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Buttons and form controls */
+button,
+input,
+select,
+textarea {
+  font-size: 1rem;
+}
+
+/* Improve readability of descriptions and labels */
+small,
+.caption,
+.muted {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Algorithm code */
+pre,
+code {
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
