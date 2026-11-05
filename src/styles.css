@@ -798,3 +798,87 @@ code {
   font-size: 0.92rem;
   line-height: 1.65;
 }
+
+/* =====================================
+   GRAPH ATLAS - HIGH READABILITY UPDATE
+===================================== */
+
+/* Global typography */
+html {
+  font-size: 18px !important;
+}
+
+body {
+  font-size: 18px !important;
+  line-height: 1.7 !important;
+  color: #202b27 !important;
+}
+
+/* Headings */
+h1 {
+  font-size: 2.7rem !important;
+  color: #17251f !important;
+}
+
+h2 {
+  font-size: 2rem !important;
+  color: #1d3028 !important;
+}
+
+h3 {
+  font-size: 1.55rem !important;
+  color: #263a30 !important;
+}
+
+h4, h5, h6 {
+  color: #263a30 !important;
+}
+
+/* Main content */
+p, li, label {
+  font-size: 1.08rem !important;
+  line-height: 1.75 !important;
+  color: #34443c;
+}
+
+/* Secondary text */
+small,
+.caption,
+.muted,
+.text-xs,
+.text-sm {
+  color: #53635a !important;
+  font-size: 0.98rem !important;
+}
+
+/* Buttons and inputs */
+button,
+input,
+select,
+textarea {
+  font-size: 1.05rem !important;
+  color: #26352e;
+}
+
+/* Cards and descriptions */
+.card,
+.card p,
+.card li {
+  color: #34443c;
+}
+
+/* Algorithm code */
+pre,
+code {
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+}
+
+/* Links */
+a {
+  color: #28734f;
+}
+
+a:hover {
+  color: #174d35;
+}
