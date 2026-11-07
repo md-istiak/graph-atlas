@@ -16,42 +16,51 @@ const initialEdges = [
   { id: 8, from: 5, to: 6, w: 1 }
 ];
 
-const glossary = [
-  ['Vertex (node)', 'An entity in the graph. A city, person, task, or state can be represented by a vertex.'],
+const glossaryTerms = [
+  ['Vertex (node)', 'An entity in a graph. A city, person, task, or state can be represented by a vertex.'],
   ['Edge', 'A relationship or connection between two vertices.'],
-  ['Degree', 'In an undirected graph, the number of edges incident to a vertex. In directed graphs, distinguish in-degree and out-degree.'],
+  ['Degree', 'The number of incident edges in an undirected graph. Directed graphs distinguish in-degree and out-degree.'],
   ['Path', 'A sequence of vertices where consecutive vertices are connected by edges.'],
-  ['Cycle', 'A closed path that returns to its starting vertex, subject to the graph model’s conventions.'],
-  ['Connected graph', 'An undirected graph in which every pair of vertices is joined by some path.'],
-  ['Strongly connected', 'A directed graph (or component) in which every vertex can reach every other vertex.'],
+  ['Cycle', 'A path that returns to its starting vertex, following the conventions of the graph model.'],
+  ['Connected component', 'A maximal group of vertices where every pair is joined by a path.'],
   ['DAG', 'A directed acyclic graph: a directed graph containing no directed cycle.'],
-  ['Tree', 'A connected, undirected, acyclic graph. A tree with V vertices has exactly V−1 edges.'],
-  ['Forest', 'An undirected acyclic graph; each connected component is a tree.'],
+  ['Tree', 'A connected, undirected, acyclic graph. A tree with V vertices has exactly V − 1 edges.'],
+  ['Forest', 'An undirected acyclic graph; every connected component is a tree.'],
   ['Bipartite graph', 'A graph whose vertices can be divided into two sets so every edge crosses between the sets.'],
   ['Weighted graph', 'A graph whose edges carry values such as cost, distance, time, or capacity.'],
-  ['Sparse / dense', 'Sparse graphs have relatively few edges; dense graphs have edge counts closer to the maximum possible.'],
-  ['Relaxation', 'An update that improves a tentative distance or DP value using a newly considered transition.'],
-  ['Residual graph', 'The graph of remaining capacity in a flow network, including reverse edges that can undo flow.'],
-  ['Spanning tree', 'A connected, acyclic subgraph that includes every vertex of a connected undirected graph.'],
-  ['Minimum spanning tree', 'A spanning tree with minimum total edge weight. It does not necessarily give shortest paths from a root.'],
+  ['Relaxation', 'An update that improves a tentative distance using a newly considered edge or transition.'],
+  ['Priority queue', 'A data structure that returns the item with the smallest or largest priority efficiently.'],
+  ['Disjoint Set Union', 'A structure that maintains non-overlapping components while sets are merged.'],
+  ['Spanning tree', 'A connected, acyclic subgraph containing every vertex of a connected undirected graph.'],
+  ['Minimum spanning tree', 'A spanning tree with the smallest possible total edge weight. It is not generally a shortest-path tree.'],
+  ['Negative cycle', 'A cycle whose edge weights sum to a negative value; reachable negative cycles make shortest-path costs undefined.'],
+  ['Indegree', 'The number of incoming directed edges at a vertex. Kahn’s algorithm uses zero-indegree vertices as ready tasks.'],
   ['Bridge', 'An edge whose removal increases the number of connected components.'],
-  ['Articulation point', 'A vertex whose removal (and incident edges) increases the number of connected components.'],
-  ['Matching', 'A set of edges no two of which share an endpoint.'],
-  ['Eulerian trail', 'A trail that uses every edge exactly once.'],
-  ['Hamiltonian path', 'A path that visits every vertex exactly once.'],
-  ['Low-link value', 'A DFS-derived value describing how far upward in discovery order a subtree can reach under a defined edge rule.'],
-  ['Condensation graph', 'The DAG obtained by contracting every strongly connected component into one vertex.'],
-  ['Cut', 'A partition of vertices into two sets; for an s–t cut, source and sink must be on opposite sides.']
+  ['Strongly connected component', 'A maximal directed subgraph in which every vertex can reach every other vertex.'],
+  ['Residual graph', 'The graph of remaining flow capacity, including reverse edges that can undo earlier flow.'],
+  ['Matching', 'A set of edges in which no two edges share an endpoint.'],
+  ['Eulerian trail', 'A walk that uses every edge exactly once.'],
+  ['Hamiltonian path', 'A path that visits every vertex exactly once.']
 ];
 
-const roadmap = [
-  { stage: '01', title: 'Learn the model', subtitle: 'Get comfortable reading and storing graphs.', items: ['Graph fundamentals', 'Graph representations', 'BFS', 'DFS', 'Connected components', 'Cycle detection'] },
-  { stage: '02', title: 'Solve paths and ordering', subtitle: 'Recognize which graph property a problem is asking for.', items: ['Grid BFS', 'Multi-source BFS', 'Topological sorting (Kahn)', 'Shortest paths in a DAG', 'Dijkstra shortest paths', '0–1 BFS', 'Bellman–Ford'] },
-  { stage: '03', title: 'Connect efficiently', subtitle: 'Build trees, merge components, and detect critical links.', items: ['Disjoint Set Union (Union–Find)', 'Kruskal minimum spanning tree', 'Prim minimum spanning tree', 'Bridges (cut edges)', 'Articulation points', 'Bipartite graph checking'] },
-  { stage: '04', title: 'Understand directed structure', subtitle: 'Move into components, graph constraints, and advanced paths.', items: ['Strongly connected components (Kosaraju)', 'Tarjan SCC algorithm', 'Floyd–Warshall', 'Johnson’s all-pairs algorithm', 'Lowest common ancestor (binary lifting)', 'Tree diameter and center'] },
-  { stage: '05', title: 'Advanced problem solving', subtitle: 'Learn the tools behind harder contest and optimization problems.', items: ['Bipartite matching (augmenting paths)', 'Eulerian path and circuit', 'Dinic maximum flow', 'Minimum cut and max-flow min-cut theorem', '2-SAT (implication graph)', 'Tree dynamic programming', 'Centroid decomposition', 'Heavy-light decomposition', 'Traveling Salesperson Problem (bitmask DP)'] }
+const corePath = [
+  { id: 'graph-model', step: '01', title: 'Think in vertices and edges', short: 'Build the model', summary: 'Turn a real problem into a set of entities and relationships.', stage: 'Foundations', symbol: '◇' },
+  { id: 'representations', step: '02', title: 'Choose how to store the graph', short: 'Represent it', summary: 'Understand adjacency lists, matrices, and edge lists.', stage: 'Foundations', symbol: '▤' },
+  { id: 'bfs', step: '03', title: 'Explore breadth-first', short: 'BFS traversal', summary: 'Use a queue to explore by layers and find minimum edge-count paths.', stage: 'Traversal', symbol: '↗' },
+  { id: 'dfs', step: '04', title: 'Explore depth-first', short: 'DFS traversal', summary: 'Follow a branch, backtrack, and reveal graph structure.', stage: 'Traversal', symbol: '⌁' },
+  { id: 'dijkstra', step: '05', title: 'Find the cheapest route', short: 'Dijkstra', summary: 'Use a min-priority queue when edge weights are non-negative.', stage: 'Shortest paths', symbol: '◎' },
+  { id: 'bellman-ford', step: '06', title: 'Understand negative edges', short: 'Bellman–Ford', summary: 'Relax edges repeatedly and detect reachable negative cycles.', stage: 'Shortest paths', symbol: '↻' },
+  { id: 'kruskal', step: '07', title: 'Connect everything cheaply', short: 'Kruskal + DSU', summary: 'Sort edges and use disjoint sets to build a minimum spanning forest.', stage: 'Spanning trees', symbol: '⌘' },
+  { id: 'topological', step: '08', title: 'Order dependent tasks', short: 'Topological sort', summary: 'Use indegrees and a ready queue to order a directed acyclic graph.', stage: 'Directed graphs', symbol: '⇢' }
 ];
 
+const learningStages = [
+  { number: '01', title: 'Build the mental model', subtitle: 'Understand the language before the algorithms.', topics: ['graph-model', 'representations'], note: 'Vertices, edges, direction, weights, and storage.' },
+  { number: '02', title: 'Learn to explore', subtitle: 'Master the two traversal patterns.', topics: ['bfs', 'dfs'], note: 'Queues, stacks, visited sets, components, and reachability.' },
+  { number: '03', title: 'Solve path problems', subtitle: 'Choose the shortest-path tool from the constraints.', topics: ['dijkstra', 'bellman-ford', 'zero-one-bfs', 'floyd-warshall'], note: 'Unweighted distance, non-negative weights, and negative edges.' },
+  { number: '04', title: 'Connect and order', subtitle: 'Build efficient networks and respect dependencies.', topics: ['dsu', 'kruskal', 'prim', 'topological'], note: 'Minimum spanning trees, components, and DAG ordering.' },
+  { number: '05', title: 'Explore deeper structure', subtitle: 'Move into advanced graph patterns when problems demand them.', topics: ['scc', 'bridges', 'articulation', 'dinic', 'matching', 'lca'], note: 'Connectivity, cuts, flow, matching, and tree queries.' }
+];
 
 const graphPresets = {
   traversal: {
@@ -121,11 +130,17 @@ const graphPresets = {
 
 function App() {
   const [page, setPage] = useState('home');
-  const [selectedId, setSelectedId] = useState('bfs');
+  const [selectedId, setSelectedId] = useState('graph-model');
   const [search, setSearch] = useState('');
   const [activeGroup, setActiveGroup] = useState('all');
-  const [theme, setTheme] = useState(() => { try { return localStorage.getItem('graph-atlas-theme') || 'light'; } catch { return 'light'; } });
-  const [completed, setCompleted] = useState(() => { try { return JSON.parse(localStorage.getItem('graph-atlas-progress') || '[]'); } catch { return []; } });
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem('graph-atlas-theme') || 'light'; }
+    catch { return 'light'; }
+  });
+  const [completed, setCompleted] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('graph-atlas-progress') || '[]'); }
+    catch { return []; }
+  });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
@@ -147,9 +162,18 @@ function App() {
   const timerRef = useRef(null);
   const noticeTimerRef = useRef(null);
 
-  useEffect(() => { try { localStorage.setItem('graph-atlas-progress', JSON.stringify(completed)); } catch { /* Progress remains available for this session. */ } }, [completed]);
-  useEffect(() => { try { localStorage.setItem('graph-atlas-theme', theme); } catch { /* Theme remains available for this session. */ } }, [theme]);
-  useEffect(() => () => { clearInterval(timerRef.current); clearTimeout(noticeTimerRef.current); }, []);
+  useEffect(() => {
+    try { localStorage.setItem('graph-atlas-progress', JSON.stringify(completed)); }
+    catch { /* Progress remains available for this session. */ }
+  }, [completed]);
+  useEffect(() => {
+    try { localStorage.setItem('graph-atlas-theme', theme); }
+    catch { /* Theme remains available for this session. */ }
+  }, [theme]);
+  useEffect(() => () => {
+    clearInterval(timerRef.current);
+    clearTimeout(noticeTimerRef.current);
+  }, []);
   useEffect(() => {
     const onKeyDown = (event) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
@@ -158,36 +182,63 @@ function App() {
       }
       if (event.key === 'Escape') {
         if (document.activeElement === searchInputRef.current && search) setSearch('');
-        else { setMobileOpen(false); if (connectMode) { setConnectMode(false); setEdgePick([]); } if (removeEdgeMode) setRemoveEdgeMode(false); }
+        else {
+          setMobileOpen(false);
+          if (connectMode) { setConnectMode(false); setEdgePick([]); }
+          if (removeEdgeMode) setRemoveEdgeMode(false);
+        }
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [search, connectMode, removeEdgeMode]);
 
-  const filteredAlgorithms = useMemo(() => algorithms.filter(a => {
-    const q=search.trim().toLowerCase();
-    return (!q || `${a.name} ${a.summary} ${a.tag} ${a.group}`.toLowerCase().includes(q)) && (activeGroup==='all' || a.group===activeGroup);
+  const filteredAlgorithms = useMemo(() => algorithms.filter(item => {
+    const query = search.trim().toLowerCase();
+    const searchable = [item.name, item.summary, item.tag, item.group, item.idea, item.level, ...(item.how || []), ...(item.applications || [])].join(' ').toLowerCase();
+    return (!query || searchable.includes(query)) && (activeGroup === 'all' || item.group === activeGroup);
   }), [search, activeGroup]);
-  const selected = algorithms.find(a => a.id === selectedId) || algorithms[0];
-  const progress = Math.round(completed.length / algorithms.length * 100);
-  const step = steps[stepIndex] || {visited:[],frontier:[],dist:[],activeEdges:[],chosenEdges:[],current:null,message:'Choose an algorithm and press Run.'};
+  const selected = algorithms.find(item => item.id === selectedId) || algorithms[0];
+  const progress = Math.round((completed.length / algorithms.length) * 100);
+  const step = steps[stepIndex] || { visited: [], frontier: [], dist: [], activeEdges: [], chosenEdges: [], current: null, message: 'Choose an algorithm and press Run.' };
 
-  const navigate = (p, groupId) => {
-    setPage(p);
-    if (p === 'library') { setActiveGroup(groupId || 'all'); if (groupId) setSearch(''); }
+  const navigate = (nextPage, groupId) => {
+    setPage(nextPage);
+    if (nextPage === 'library') {
+      if (groupId !== undefined) setActiveGroup(groupId || 'all');
+      if (groupId) setSearch('');
+    }
     setMobileOpen(false);
-    window.scrollTo({top:0,behavior:'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const openLesson = (id) => { setSelectedId(id); setPage('lesson'); setMobileOpen(false); window.scrollTo({top:0,behavior:'smooth'}); };
-  const toggleComplete = (id) => setCompleted(prev => prev.includes(id) ? prev.filter(x=>x!==id) : [...prev,id]);
-  const showNotice = (text) => {
-    setNotice(text);
+  const openLesson = (id) => {
+    if (!algorithms.some(item => item.id === id)) return;
+    setSelectedId(id);
+    setPage('lesson');
+    setMobileOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  const openSearchResults = value => {
+    setSearch(value);
+    setActiveGroup('all');
+    setPage('library');
+    setMobileOpen(false);
+  };
+  const toggleComplete = id => setCompleted(current => current.includes(id) ? current.filter(value => value !== id) : [...current, id]);
+  const showNotice = message => {
+    setNotice(message);
     clearTimeout(noticeTimerRef.current);
     noticeTimerRef.current = window.setTimeout(() => setNotice(''), 3200);
   };
-  const pause = () => { clearInterval(timerRef.current); timerRef.current = null; };
-  const clearExecution = () => { pause(); setSteps([]); setStepIndex(0); };
+  const pause = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+  };
+  const clearExecution = () => {
+    pause();
+    setSteps([]);
+    setStepIndex(0);
+  };
   const run = () => {
     pause();
     if (!nodes.length) { showNotice('Add at least one vertex before running an algorithm.'); return; }
@@ -215,7 +266,7 @@ function App() {
     pause(); setNodes(initialNodes); setEdges(initialEdges); setDirected(false); setWeighted(true);
     setSource(0); setSteps([]); setStepIndex(0); setConnectMode(false); setRemoveEdgeMode(false); setEdgePick([]); setEdgeWeight(3);
   };
-  const loadPreset = (key) => {
+  const loadPreset = key => {
     const preset = graphPresets[key];
     if (!preset) return;
     pause();
@@ -225,17 +276,11 @@ function App() {
     setWeighted(preset.weighted);
     setMode(preset.mode);
     setSource(preset.source ?? 0);
-    setSteps([]);
-    setStepIndex(0);
-    setConnectMode(false);
-    setRemoveEdgeMode(false);
-    setEdgePick([]);
-    setNotice(`${preset.label} loaded. Press Run to start the trace.`);
-    clearTimeout(noticeTimerRef.current);
-    noticeTimerRef.current = window.setTimeout(() => setNotice(''), 3200);
+    setSteps([]); setStepIndex(0); setConnectMode(false); setRemoveEdgeMode(false); setEdgePick([]);
+    showNotice(`${preset.label} loaded. Press Run to start the trace.`);
   };
-  const nextNodeLabel = (list) => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').find(label => !list.some(node => node.label === label)) || `V${list.length + 1}`;
-  const findOpenPosition = (list) => {
+  const nextNodeLabel = list => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').find(label => !list.some(node => node.label === label)) || `V${list.length + 1}`;
+  const findOpenPosition = list => {
     let best = { x: 360, y: 210, distance: -1 };
     for (let x = 46; x <= 674; x += 28) {
       for (let y = 46; y <= 374; y += 28) {
@@ -246,50 +291,48 @@ function App() {
     return best;
   };
   const addNode = () => {
-    setConnectMode(false);
-    setRemoveEdgeMode(false);
-    setEdgePick([]);
+    setConnectMode(false); setRemoveEdgeMode(false); setEdgePick([]);
     if (nodes.length >= 20) { showNotice('The graph lab supports up to 20 vertices.'); return; }
     const id = nodes.length;
     const position = findOpenPosition(nodes);
     if (position.distance < 52) { showNotice('There is no clear space left. Remove or move vertices before adding another.'); return; }
-    setNodes(prev => [...prev, { id, label: nextNodeLabel(prev), x: position.x, y: position.y }]);
+    setNodes(current => [...current, { id, label: nextNodeLabel(current), x: position.x, y: position.y }]);
     clearExecution();
   };
-  const onNodeClick = (id) => {
+  const onNodeClick = id => {
     if (removeEdgeMode) return;
-    if(connectMode){
-      if(edgePick.includes(id)){setEdgePick(edgePick.filter(x=>x!==id));return;}
-      const next=[...edgePick,id]; setEdgePick(next);
-      if(next.length===2){
-        const [u,v]=next;
-        const duplicate = edges.some(e => (e.from===u && e.to===v) || (e.from===v && e.to===u && !directed));
-        if (u === v) showNotice('Self-loops are not supported in this visualizer.');
+    if (connectMode) {
+      if (edgePick.includes(id)) { setEdgePick(edgePick.filter(value => value !== id)); return; }
+      const next = [...edgePick, id];
+      setEdgePick(next);
+      if (next.length === 2) {
+        const [from, to] = next;
+        const duplicate = edges.some(edge => (edge.from === from && edge.to === to) || (edge.from === to && edge.to === from && !directed));
+        if (from === to) showNotice('Self-loops are not supported in this visualizer.');
         else if (duplicate) showNotice('That connection already exists.');
-        else if (String(edgeWeight).trim() === '' || !Number.isSafeInteger(Number(edgeWeight)) || Math.abs(Number(edgeWeight)) > 1000000) {
-          showNotice('Enter a whole-number edge weight between −1,000,000 and 1,000,000.');
-        } else {
+        else if (String(edgeWeight).trim() === '' || !Number.isSafeInteger(Number(edgeWeight)) || Math.abs(Number(edgeWeight)) > 1000000) showNotice('Enter a whole-number edge weight between −1,000,000 and 1,000,000.');
+        else {
           const weight = Number(edgeWeight);
-          setEdges(prev=>[...prev,{id:Math.max(-1,...prev.map(e=>e.id))+1,from:u,to:v,w:weight}]);
+          setEdges(current => [...current, { id: Math.max(-1, ...current.map(edge => edge.id)) + 1, from, to, w: weight }]);
           clearExecution();
         }
-        setEdgePick([]);setConnectMode(false);
+        setEdgePick([]); setConnectMode(false);
       }
     } else {
       setSource(id);
       if (steps.length) clearExecution();
     }
   };
-  const onCanvasClick = (e) => {
+  const onCanvasClick = event => {
     if (!svgRef.current || connectMode || removeEdgeMode) return;
     if (nodes.length >= 20) { showNotice('The graph lab supports up to 20 vertices.'); return; }
     const rect = svgRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width * 720;
-    const y = (e.clientY - rect.top) / rect.height * 420;
+    const x = (event.clientX - rect.left) / rect.width * 720;
+    const y = (event.clientY - rect.top) / rect.height * 420;
     if (x > 24 && x < 696 && y > 24 && y < 396) {
       if (nodes.some(node => Math.hypot(node.x - x, node.y - y) < 52)) { showNotice('Choose a spot at least 52 units away from existing vertices.'); return; }
       const id = nodes.length;
-      setNodes(prev => [...prev, { id, label: nextNodeLabel(prev), x, y }]);
+      setNodes(current => [...current, { id, label: nextNodeLabel(current), x, y }]);
       clearExecution();
     }
   };
@@ -298,109 +341,269 @@ function App() {
     event.stopPropagation();
     clearExecution();
     dragRef.current = { id, pointerId: event.pointerId };
-    try { event.currentTarget.setPointerCapture(event.pointerId); } catch { /* Pointer capture is an enhancement, not a requirement. */ }
+    try { event.currentTarget.setPointerCapture(event.pointerId); }
+    catch { /* Pointer capture is an enhancement, not a requirement. */ }
   };
-  const onCanvasPointerMove = (event) => {
+  const onCanvasPointerMove = event => {
     const drag = dragRef.current;
     if (!drag || !svgRef.current) return;
     const rect = svgRef.current.getBoundingClientRect();
     if (!rect.width || !rect.height) return;
     const x = Math.max(30, Math.min(690, (event.clientX - rect.left) / rect.width * 720));
     const y = Math.max(30, Math.min(390, (event.clientY - rect.top) / rect.height * 420));
-    setNodes(prev => {
-      const moving = prev.find(node => node.id === drag.id);
-      if (!moving || prev.some(node => node.id !== drag.id && Math.hypot(node.x - x, node.y - y) < 52)) return prev;
-      return prev.map(node => node.id === drag.id ? { ...node, x, y } : node);
+    setNodes(current => {
+      const moving = current.find(node => node.id === drag.id);
+      if (!moving || current.some(node => node.id !== drag.id && Math.hypot(node.x - x, node.y - y) < 52)) return current;
+      return current.map(node => node.id === drag.id ? { ...node, x, y } : node);
     });
   };
-  const onCanvasPointerUp = (event) => {
+  const onCanvasPointerUp = event => {
     if (dragRef.current?.pointerId === event.pointerId) dragRef.current = null;
   };
   const removeSelectedNode = () => {
-    const id=source; if(nodes.length<=1){showNotice('Keep at least one vertex in the graph.');return;}
-    const remap={}; let nextId=0; nodes.forEach(n=>{if(n.id!==id) remap[n.id]=nextId++;});
-    setNodes(nodes.filter(n=>n.id!==id).map(n=>({...n,id:remap[n.id]})));
-    setEdges(edges.filter(e=>e.from!==id&&e.to!==id).map((e,i)=>({...e,id:i,from:remap[e.from],to:remap[e.to]})));
-    setSource(0);clearExecution();setEdgePick([]);setConnectMode(false);setRemoveEdgeMode(false);
+    const id = source;
+    if (nodes.length <= 1) { showNotice('Keep at least one vertex in the graph.'); return; }
+    const remap = {};
+    let nextId = 0;
+    nodes.forEach(node => { if (node.id !== id) remap[node.id] = nextId++; });
+    setNodes(nodes.filter(node => node.id !== id).map(node => ({ ...node, id: remap[node.id] })));
+    setEdges(edges.filter(edge => edge.from !== id && edge.to !== id).map((edge, index) => ({ ...edge, id: index, from: remap[edge.from], to: remap[edge.to] })));
+    setSource(0); clearExecution(); setEdgePick([]); setConnectMode(false); setRemoveEdgeMode(false);
   };
-  const onEdgeClick = (id) => {
+  const onEdgeClick = id => {
     if (!removeEdgeMode) return;
-    setEdges(prev => prev.filter(edge => edge.id !== id));
-    setRemoveEdgeMode(false);
-    clearExecution();
-    showNotice('Connection removed.');
+    setEdges(current => current.filter(edge => edge.id !== id));
+    setRemoveEdgeMode(false); clearExecution(); showNotice('Connection removed.');
+  };
+
+  const lessonToLabMode = id => ({ bfs: 'bfs', dfs: 'dfs', dijkstra: 'dijkstra', 'bellman-ford': 'bellman', prim: 'prim', kruskal: 'kruskal', topological: 'topo' }[id] || 'bfs');
+  const openLessonInLab = id => {
+    setMode(lessonToLabMode(id));
+    navigate('visualizer');
   };
 
   return <div className={`app ${theme}`}>
-    <aside className={`sidebar ${mobileOpen?'open':''}`}>
-      <div className="brand" onClick={()=>navigate('home')} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();navigate('home');}}} role="button" tabIndex="0"><div className="brand-mark">G<span>∿</span></div><div><strong>GRAPH ATLAS</strong><small>THE GRAPH THEORY LAB</small></div></div>
-      <div className="side-label">WORKSPACE</div>
-      <nav className="side-nav">
-        <button className={page==='home'?'active':''} onClick={()=>navigate('home')}><span className="nav-icon">⌂</span> Overview</button>
-        <button className={page==='library'||page==='lesson'?'active':''} onClick={()=>navigate('library')}><span className="nav-icon">▦</span> Algorithm library <i>{algorithms.length}</i></button>
-        <button className={page==='visualizer'?'active':''} onClick={()=>navigate('visualizer')}><span className="nav-icon">⌘</span> Graph lab</button>
-        <button className={page==='roadmap'?'active':''} onClick={()=>navigate('roadmap')}><span className="nav-icon">◷</span> Learning path</button>
-        <button className={page==='glossary'?'active':''} onClick={()=>navigate('glossary')}><span className="nav-icon">Aa</span> Graph glossary</button>
-        <button className={page==='resources'?'active':''} onClick={()=>navigate('resources')}><span className="nav-icon">↗</span> References</button>
+    <aside className={`sidebar ${mobileOpen ? 'open' : ''}`}>
+      <button className="brand" onClick={() => navigate('home')} aria-label="Graph Atlas home">
+        <span className="brand-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 27 17 10 31 16 27 31 8 27M17 10l10 21M8 27l23-11"/><circle cx="8" cy="27" r="3"/><circle cx="17" cy="10" r="3"/><circle cx="31" cy="16" r="3"/><circle cx="27" cy="31" r="3"/></svg></span>
+        <span className="brand-copy"><strong>graph<span>atlas</span></strong><small>GRAPH THEORY FIELD GUIDE</small></span>
+      </button>
+      <div className="side-label">LEARN</div>
+      <nav className="side-nav" aria-label="Main navigation">
+        <button className={page === 'home' ? 'active' : ''} onClick={() => navigate('home')}><span className="nav-icon">⌂</span><span>Overview</span><kbd>01</kbd></button>
+        <button className={page === 'roadmap' ? 'active' : ''} onClick={() => navigate('roadmap')}><span className="nav-icon">⌁</span><span>Guided pathway</span><kbd>02</kbd></button>
+        <button className={page === 'library' || page === 'lesson' ? 'active' : ''} onClick={() => navigate('library')}><span className="nav-icon">▤</span><span>Topic explorer</span><i>{algorithms.length}</i></button>
+        <button className={page === 'visualizer' ? 'active' : ''} onClick={() => navigate('visualizer')}><span className="nav-icon">◎</span><span>Interactive graph lab</span><b className="nav-live">LIVE</b></button>
       </nav>
-      <div className="side-label side-label-spaced">YOUR PROGRESS</div>
-      <div className="progress-mini"><div className="progress-meta"><span>Library explored</span><b>{completed.length}/{algorithms.length}</b></div><div className="progress-track"><span style={{width:`${progress}%`}}/></div><small>{progress}% of the atlas marked complete</small></div>
-      <div className="sidebar-bottom"><div className="offline-indicator"><span/> SELF-CONTAINED LEARNING</div><div className="version-line">GRAPH ATLAS <span>v1.3</span></div></div>
+      <div className="side-label side-label-spaced">REFERENCE DESK</div>
+      <nav className="side-nav secondary-nav" aria-label="Reference navigation">
+        <button className={page === 'glossary' ? 'active' : ''} onClick={() => navigate('glossary')}><span className="nav-icon">Aa</span><span>Graph glossary</span></button>
+        <button className={page === 'resources' ? 'active' : ''} onClick={() => navigate('resources')}><span className="nav-icon">↗</span><span>Further reading</span></button>
+      </nav>
+      <div className="sidebar-progress">
+        <div className="sidebar-progress-top"><span>YOUR PROGRESS</span><b>{progress}%</b></div>
+        <div className="sidebar-progress-track"><span style={{ width: `${progress}%` }} /></div>
+        <p>{completed.length} of {algorithms.length} topics completed</p>
+        <button onClick={() => navigate('roadmap')}>View learning path <span>→</span></button>
+      </div>
+      <div className="sidebar-bottom">
+        <div className="offline-indicator"><span/> LOCAL · NO ACCOUNT REQUIRED</div>
+        <div className="version-line">GRAPH ATLAS <span>v1.4 / VISUAL EDITION</span></div>
+      </div>
     </aside>
-    {mobileOpen && <button className="sidebar-backdrop" aria-label="Close navigation" onClick={()=>setMobileOpen(false)}/>}
+    {mobileOpen && <button className="sidebar-backdrop" aria-label="Close navigation" onClick={() => setMobileOpen(false)} />}
 
     <main className="main-area">
       <header className="topbar">
-        <button className="mobile-menu icon-button" onClick={()=>setMobileOpen(!mobileOpen)} aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={mobileOpen}>☰</button>
-        <div className="breadcrumbs"><span>LEARNING ENVIRONMENT</span><b>/</b><strong>{page==='home'?'OVERVIEW':page.toUpperCase()}</strong></div>
-        <div className="top-actions"><div className="global-search"><span>⌕</span><input ref={searchInputRef} aria-label="Search algorithms and concepts" placeholder="Search algorithms, concepts…" value={search} onChange={e=>{setSearch(e.target.value);setActiveGroup('all');if(page!=='library')setPage('library');}}/><kbd>Ctrl K</kbd>{search && <button type="button" className="search-clear" aria-label="Clear search" onClick={()=>setSearch('')}>×</button>}</div><button className="icon-button theme-toggle" onClick={()=>setTheme(t=>t==='dark'?'light':'dark')} title="Toggle theme" aria-label="Toggle color theme">{theme==='dark'?'☼':'☾'}</button></div>
+        <button className="mobile-menu icon-button" onClick={() => setMobileOpen(value => !value)} aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={mobileOpen}>☰</button>
+        <div className="breadcrumbs"><span>GRAPH ATLAS</span><b>/</b><strong>{page === 'home' ? 'OVERVIEW' : page === 'lesson' ? 'LESSON' : page === 'visualizer' ? 'GRAPH LAB' : page.toUpperCase()}</strong></div>
+        <div className="top-actions">
+          <label className="global-search"><span className="search-glyph">⌕</span><input ref={searchInputRef} aria-label="Search graph topics" placeholder="Find a concept or algorithm…" value={search} onChange={event => openSearchResults(event.target.value)} /><kbd>Ctrl K</kbd>{search && <button type="button" className="search-clear" aria-label="Clear search" onClick={() => setSearch('')}>×</button>}</label>
+          <button className="icon-button theme-toggle" onClick={() => setTheme(value => value === 'dark' ? 'light' : 'dark')} title="Toggle theme" aria-label="Toggle color theme">{theme === 'dark' ? '☼' : '☾'}</button>
+        </div>
       </header>
 
-      {page==='home' && <Home algorithms={algorithms} completed={completed} progress={progress} onNavigate={navigate} onOpen={openLesson} />}
-      {page==='library' && <Library search={search} setSearch={setSearch} activeGroup={activeGroup} setActiveGroup={setActiveGroup} items={filteredAlgorithms} completed={completed} onOpen={openLesson} />}
-      {page==='lesson' && <Lesson item={selected} completed={completed.includes(selected.id)} onToggle={()=>toggleComplete(selected.id)} onBack={()=>navigate('library')} onVisualize={()=>{setMode(['bfs','dfs','dijkstra','prim','kruskal'].includes(selected.id)?selected.id: selected.id==='bellman-ford'?'bellman':selected.id==='topological'?'topo':'bfs');navigate('visualizer');}} />}
-      {page==='visualizer' && <Visualizer nodes={nodes} edges={edges} directed={directed} setDirected={value=>{setDirected(value);clearExecution();}} weighted={weighted} setWeighted={setWeighted} mode={mode} setMode={m=>{setMode(m);clearExecution();}} source={source} setSource={value=>{setSource(value);clearExecution();}} steps={steps} stepIndex={stepIndex} step={step} run={run} play={play} pause={pause} setStepIndex={setStepIndex} playSpeed={playSpeed} setPlaySpeed={setPlaySpeed} addNode={addNode} resetGraph={resetGraph} loadPreset={loadPreset} connectMode={connectMode} setConnectMode={setConnectMode} removeEdgeMode={removeEdgeMode} setRemoveEdgeMode={setRemoveEdgeMode} edgePick={edgePick} onNodeClick={onNodeClick} onEdgeClick={onEdgeClick} onCanvasClick={onCanvasClick} svgRef={svgRef} edgeWeight={edgeWeight} setEdgeWeight={setEdgeWeight} removeSelectedNode={removeSelectedNode} showNotice={showNotice} onOpenLesson={id => openLesson(id)} onNodePointerDown={onNodePointerDown} onCanvasPointerMove={onCanvasPointerMove} onCanvasPointerUp={onCanvasPointerUp} />}
-      {page==='roadmap' && <Roadmap completed={completed} onOpen={openLesson} />}
-      {page==='glossary' && <Glossary />}
-      {page==='resources' && <Resources />}
-      <footer className="footer"><span>GRAPH ATLAS</span><span>Learn the model. Trace the algorithm. Prove the result.</span><span>Built for curious problem solvers.</span></footer>
-      {notice && <div className="toast">{notice}</div>}
+      {page === 'home' && <Home algorithms={algorithms} completed={completed} progress={progress} onNavigate={navigate} onOpen={openLesson} onSearch={openSearchResults} />}
+      {page === 'library' && <Library search={search} setSearch={setSearch} activeGroup={activeGroup} setActiveGroup={setActiveGroup} items={filteredAlgorithms} completed={completed} onOpen={openLesson} />}
+      {page === 'lesson' && <Lesson item={selected} completed={completed.includes(selected.id)} onToggle={() => toggleComplete(selected.id)} onBack={() => navigate('library')} onVisualize={() => openLessonInLab(selected.id)} />}
+      {page === 'visualizer' && <Visualizer nodes={nodes} edges={edges} directed={directed} setDirected={value => { setDirected(value); clearExecution(); }} weighted={weighted} setWeighted={setWeighted} mode={mode} setMode={value => { setMode(value); clearExecution(); }} source={source} setSource={value => { setSource(value); clearExecution(); }} steps={steps} stepIndex={stepIndex} step={step} run={run} play={play} pause={pause} setStepIndex={setStepIndex} playSpeed={playSpeed} setPlaySpeed={setPlaySpeed} addNode={addNode} resetGraph={resetGraph} loadPreset={loadPreset} connectMode={connectMode} setConnectMode={setConnectMode} removeEdgeMode={removeEdgeMode} setRemoveEdgeMode={setRemoveEdgeMode} edgePick={edgePick} onNodeClick={onNodeClick} onEdgeClick={onEdgeClick} onCanvasClick={onCanvasClick} svgRef={svgRef} edgeWeight={edgeWeight} setEdgeWeight={setEdgeWeight} removeSelectedNode={removeSelectedNode} showNotice={showNotice} onOpenLesson={id => openLesson(id)} onNodePointerDown={onNodePointerDown} onCanvasPointerMove={onCanvasPointerMove} onCanvasPointerUp={onCanvasPointerUp} />}
+      {page === 'roadmap' && <Roadmap completed={completed} onOpen={openLesson} />}
+      {page === 'glossary' && <Glossary />}
+      {page === 'resources' && <Resources />}
+      <footer className="footer"><span>GRAPH ATLAS</span><span>Model the graph. Trace the logic. Understand the result.</span><span>Built for curious problem solvers.</span></footer>
+      {notice && <div className="toast" role="status"><span>✦</span>{notice}</div>}
     </main>
   </div>;
 }
 
-function PageHeading({eyebrow,title,description,children}) { return <div className="page-heading"><div><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>{description}</p></div>{children}</div>; }
-function Home({algorithms,completed,progress,onNavigate,onOpen}) {
-  const featured=['bfs','dijkstra','kruskal','scc'].map(id=>algorithms.find(a=>a.id===id));
-  const stats=[[algorithms.length, 'LESSON TOPICS'],['10', 'LEARNING CATEGORIES'],['C++17','IMPLEMENTATION FOCUS'],['∞','GRAPHS TO EXPLORE']];
-  return <div className="content-wrap">
-    <section className="hero-panel"><div className="hero-copy"><div className="eyebrow"><span className="pulse-dot"/> YOUR GRAPH THEORY COMPANION</div><h1>Understand the<br/><em>connections.</em></h1><p>A practical atlas of graph theory — from your first traversal to advanced network flow. Learn the idea, see the algorithm, then write it in C++.</p><div className="hero-actions"><button className="primary-btn" onClick={()=>onNavigate('library')}>Explore algorithms <span>↗</span></button><button className="text-btn" onClick={()=>onNavigate('visualizer')}>Open graph lab <span>→</span></button></div><div className="hero-note"><span>✳</span> THEORY <b>+</b> VISUALS <b>+</b> IMPLEMENTATION <b>+</b> APPLICATIONS</div></div><div className="hero-visual"><div className="orbit orbit-one"/><div className="orbit orbit-two"/><svg viewBox="0 0 440 340" role="img" aria-label="Abstract connected graph illustration"><g className="hero-edges"><path d="M76 170 L168 66 L280 94 L360 182 L282 276 L137 267 L76 170 M168 66 L214 188 L280 94 M214 188 L360 182 M214 188 L137 267 M214 188 L282 276 M76 170 L214 188"/><path d="M168 66 L282 276 M137 267 L280 94" className="edge-dash"/></g><g className="hero-nodes"><circle cx="76" cy="170" r="9"/><circle cx="168" cy="66" r="12"/><circle cx="280" cy="94" r="8"/><circle cx="360" cy="182" r="11"/><circle cx="282" cy="276" r="9"/><circle cx="137" cy="267" r="7"/><circle cx="214" cy="188" r="16" className="center-node"/></g><g className="hero-labels"><text x="55" y="151">01</text><text x="151" y="43">02</text><text x="288" y="75">03</text><text x="375" y="178">04</text><text x="290" y="301">05</text><text x="113" y="291">06</text><text x="202" y="192">G</text></g></svg><div className="floating-chip chip-a"><span/> O(V + E) <small>TRAVERSAL</small></div><div className="floating-chip chip-b">01 <small>CONNECTED COMPONENT</small></div></div></section>
-    <div className="stats-grid">{stats.map(([v,l])=><div className="stat-card" key={l}><strong>{v}</strong><span>{l}</span></div>)}</div>
-    <section className="section-block"><div className="section-head"><div><div className="eyebrow">START HERE</div><h2>A map of the territory</h2><p>Follow a natural progression, or jump straight to the algorithm you need.</p></div><button className="subtle-btn" onClick={()=>onNavigate('roadmap')}>View learning path ↗</button></div><div className="path-grid">{algorithmGroups.slice(0,6).map((g,i)=><button className="path-card" key={g.id} onClick={()=>onNavigate('library',g.id)}><span className="path-number">0{i+1}</span><span className="path-arrow">↗</span><h3>{g.title}</h3><p>{g.desc}</p><div className="path-line"><span style={{width:`${[34,55,48,63,42,38][i]}%`}}/></div></button>)}</div></section>
-    <section className="section-block"><div className="section-head"><div><div className="eyebrow">THE ESSENTIALS</div><h2>Algorithms worth knowing</h2><p>Four foundational ideas that unlock a large part of graph problem solving.</p></div><button className="subtle-btn" onClick={()=>onNavigate('library')}>Full library ↗</button></div><div className="featured-grid">{featured.map((a,i)=><article className="featured-card" key={a.id} role="button" tabIndex="0" onClick={()=>onOpen(a.id)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onOpen(a.id);}}}><div className="featured-top"><span className="feature-index">0{i+1}</span><span className="level-pill">{a.level}</span></div><h3>{a.name}</h3><p>{a.summary}</p><div className="feature-bottom"><span>{a.complexity}</span><b>Read lesson ↗</b></div></article>)}</div></section>
-    <section className="progress-banner"><div className="progress-orbit">{progress}%</div><div><div className="eyebrow">YOUR LEARNING RECORD</div><h2>Small steps. Strong foundations.</h2><p>{completed.length ? `${completed.length} of ${algorithms.length} topics marked complete. Keep building your graph intuition.` : 'Mark lessons complete as you work through them. Your progress stays saved in this browser.'}</p></div><button className="primary-btn" onClick={()=>onNavigate('roadmap')}>Continue learning <span>→</span></button></section>
+function PageHeading({ eyebrow, title, description, children }) {
+  return <div className="page-heading"><div><div className="eyebrow">{eyebrow}</div><h1>{title}</h1><p>{description}</p></div>{children}</div>;
+}
+
+function GraphIllustration() {
+  return <div className="hero-visual" aria-label="Animated connected graph illustration">
+    <div className="hero-visual-glow glow-a"/><div className="hero-visual-glow glow-b"/>
+    <div className="hero-visual-label label-top"><span className="live-dot"/> NETWORK MODEL / 07 NODES</div>
+    <svg className="hero-network" viewBox="0 0 560 390" role="img" aria-label="A connected graph with seven vertices and highlighted edges">
+      <defs><linearGradient id="networkLine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#61e4d2"/><stop offset="1" stopColor="#7ca5ff"/></linearGradient><radialGradient id="nodeGlow"><stop offset="0" stopColor="#a4fff0"/><stop offset="1" stopColor="#39b9b0"/></radialGradient></defs>
+      <g className="network-lines"><path d="M77 178 166 78 286 112 430 72 487 218 365 310 190 292 77 178M166 78 190 292M286 112 365 310M77 178 286 112M190 292 487 218M286 112 487 218"/><path className="network-dash" d="M166 78 365 310M77 178 430 72M190 292 286 112"/></g>
+      <g className="network-nodes"><circle className="node-halo" cx="77" cy="178" r="18"/><circle cx="77" cy="178" r="8"/><circle cx="166" cy="78" r="10"/><circle cx="286" cy="112" r="13"/><circle cx="430" cy="72" r="8"/><circle cx="487" cy="218" r="11"/><circle cx="365" cy="310" r="9"/><circle cx="190" cy="292" r="8"/><circle className="node-core" cx="286" cy="112" r="5"/></g>
+      <g className="network-node-labels"><text x="47" y="158">A</text><text x="150" y="52">B</text><text x="282" y="83">C</text><text x="445" y="55">D</text><text x="505" y="218">E</text><text x="375" y="340">F</text><text x="164" y="321">G</text></g>
+    </svg>
+    <div className="floating-data data-a"><b>O(V + E)</b><span>TRAVERSAL COST</span></div>
+    <div className="floating-data data-b"><span className="data-spark">✦</span><b>Connected</b><span>7 VERTICES · 9 EDGES</span></div>
+    <div className="hero-visual-label label-bottom"><span className="signal-bars"><i/><i/><i/></span> GRAPH STRUCTURE / LIVE VIEW</div>
   </div>;
 }
 
-function Library({search,setSearch,activeGroup,setActiveGroup,items,completed,onOpen}) {
-  return <div className="content-wrap"><PageHeading eyebrow="THE KNOWLEDGE BASE" title="Algorithm library" description="Browse graph concepts and algorithms. Each lesson includes the core idea, step-by-step logic, complexity, use cases, pitfalls, and C++ examples."><span className="heading-count">{items.length} RESULTS</span></PageHeading>
-    <div className="library-controls"><div className="library-search"><span>⌕</span><input aria-label="Find an algorithm or concept" placeholder="Find an algorithm or concept…" value={search} onChange={e=>setSearch(e.target.value)}/>{search&&<button type="button" aria-label="Clear search" onClick={()=>setSearch('')}>×</button>}</div><select value={activeGroup} onChange={e=>setActiveGroup(e.target.value)}><option value="all">All categories</option>{algorithmGroups.map(g=><option value={g.id} key={g.id}>{g.title}</option>)}</select></div>
-    {algorithmGroups.filter(g=>activeGroup==='all'||g.id===activeGroup).map(g=>{const groupItems=items.filter(a=>a.group===g.id);if(!groupItems.length)return null;return <section className="library-section" key={g.id}><div className="library-group-heading"><div><div className="eyebrow">{g.title.toUpperCase()}</div><p>{g.desc}</p></div><span>{groupItems.length.toString().padStart(2,'0')} TOPICS</span></div><div className="algorithm-grid">{groupItems.map((a,i)=><button className="algorithm-card" key={a.id} onClick={()=>onOpen(a.id)}><div className="algorithm-card-top"><span className="algorithm-symbol">{String.fromCharCode(65+(i%26))}</span><span className="level-pill">{a.level}</span></div><h3>{a.name}</h3><p>{a.summary}</p><div className="algorithm-card-bottom"><span>{a.complexity}</span><span className={completed.includes(a.id)?'done-mark':'open-mark'}>{completed.includes(a.id)?'✓ COMPLETE':'OPEN LESSON ↗'}</span></div></button>)}</div></section>})}
-    {!items.length&&<div className="empty-state"><div>⌕</div><h3>No matching lessons</h3><p>Try a different keyword or category.</p><button className="subtle-btn" onClick={()=>{setSearch('');setActiveGroup('all')}}>Clear filters</button></div>}
+function Home({ algorithms, completed, progress, onNavigate, onOpen, onSearch }) {
+  const [topicQuery, setTopicQuery] = useState('');
+  const nextItem = corePath.find(item => !completed.includes(item.id)) || corePath[corePath.length - 1];
+  const featured = ['bfs', 'dijkstra', 'kruskal', 'topological'].map(id => algorithms.find(item => item.id === id)).filter(Boolean);
+  const countDone = corePath.filter(item => completed.includes(item.id)).length;
+  return <div className="content-wrap home-wrap">
+    <section className="hero-panel">
+      <div className="hero-copy">
+        <div className="hero-kicker"><span className="pulse-dot"/> A VISUAL FIELD GUIDE TO GRAPH THEORY</div>
+        <h1>See the structure<br/>behind <em>every connection.</em></h1>
+        <p>Build intuition, watch algorithms make decisions, and learn when to use each technique. One clear path from the basics to confident problem solving.</p>
+        <div className="hero-actions">
+          <button className="primary-btn hero-primary" onClick={() => onOpen(nextItem.id)}>{completed.length ? 'Continue learning' : 'Start the journey'} <span>↗</span></button>
+          <button className="hero-secondary" onClick={() => onNavigate('visualizer')}><span className="play-symbol">▶</span> Enter graph lab</button>
+        </div>
+        <div className="hero-proof"><span><i/> No account</span><span><i/> Works locally</span><span><i/> C++17 examples</span></div>
+      </div>
+      <GraphIllustration />
+      <div className="hero-watermark">G</div>
+    </section>
+
+    <div className="stats-strip">
+      <div className="stat-cell"><b>{algorithms.length}</b><span>LESSON TOPICS</span></div>
+      <div className="stat-cell"><b>07</b><span>LIVE ALGORITHMS</span></div>
+      <div className="stat-cell"><b>05</b><span>LEARNING STAGES</span></div>
+      <div className="stat-cell"><b>C++17</b><span>CODE EXAMPLES</span></div>
+      <div className="stat-progress"><div className="progress-ring" style={{ '--progress': `${progress}%` }}><span>{progress}%</span></div><div><b>Your progress</b><small>{completed.length} of {algorithms.length} topics explored</small></div></div>
+    </div>
+
+    <section className="journey-section">
+      <div className="section-heading-row">
+        <div><div className="eyebrow"><span className="section-star">✦</span> THE RECOMMENDED ROUTE</div><h2>One path. Strong foundations.</h2><p>Follow the sequence in order. Each idea prepares you for the next, but nothing is locked.</p></div>
+        <button className="quiet-link" onClick={() => onNavigate('roadmap')}>View full pathway <span>↗</span></button>
+      </div>
+      <div className="journey-layout">
+        <div className="journey-list">
+          {corePath.map((item, index) => {
+            const isDone = completed.includes(item.id);
+            const isNext = !isDone && nextItem.id === item.id;
+            return <button className={`journey-step ${isDone ? 'is-done' : ''} ${isNext ? 'is-next' : ''}`} key={item.id} onClick={() => onOpen(item.id)}>
+              <span className="journey-step-number">{isDone ? '✓' : item.step}</span>
+              <span className="journey-step-icon">{item.symbol}</span>
+              <span className="journey-step-copy"><small>{item.stage}</small><b>{item.title}</b><span>{item.summary}</span></span>
+              <span className="journey-step-state">{isDone ? 'COMPLETE' : isNext ? 'START HERE' : 'EXPLORE'} <i>↗</i></span>
+            </button>;
+          })}
+        </div>
+        <aside className="journey-aside">
+          <div className="next-card-orbit orbit-a"/><div className="next-card-orbit orbit-b"/>
+          <div className="next-card-tag"><span className="pulse-dot"/> YOUR NEXT STEP</div>
+          <div className="next-card-number">{nextItem.step}</div>
+          <h3>{nextItem.short}</h3>
+          <p>{nextItem.summary}</p>
+          <div className="next-card-progress"><div><span>CORE PATHWAY</span><b>{countDone}/{corePath.length}</b></div><div className="next-track"><i style={{ width: `${(countDone / corePath.length) * 100}%` }}/></div></div>
+          <button onClick={() => onOpen(nextItem.id)}>Continue this step <span>→</span></button>
+        </aside>
+      </div>
+    </section>
+
+    <section className="explore-banner">
+      <div className="explore-icon">⌕</div>
+      <div className="explore-copy"><div className="eyebrow">LOOKING FOR SOMETHING SPECIFIC?</div><h2>Jump straight to a topic.</h2><p>Search all {algorithms.length} lessons by name, concept, application, or keyword.</p></div>
+      <form className="explore-search" role="search" onSubmit={event => { event.preventDefault(); onSearch(topicQuery); }}><span aria-hidden="true">⌕</span><input aria-label="Search all topics" placeholder="Try ‘cycle detection’ or ‘Dijkstra’…" value={topicQuery} onChange={event => setTopicQuery(event.target.value)} /><button type="submit" aria-label="Search topics">→</button></form>
+      <button className="explore-all" onClick={() => onNavigate('library')}>Browse all topics <span>↗</span></button>
+    </section>
+
+    <section className="featured-section">
+      <div className="section-heading-row"><div><div className="eyebrow">LEARN BY WATCHING</div><h2>Algorithms you can bring to life.</h2><p>Seven algorithms in the graph lab expose their internal decisions, one step at a time.</p></div><button className="quiet-link" onClick={() => onNavigate('visualizer')}>Open the lab <span>↗</span></button></div>
+      <div className="featured-grid">{featured.map((item, index) => <button className={`featured-card feature-${index + 1}`} key={item.id} onClick={() => onOpen(item.id)}>
+        <div className="featured-card-top"><span className="feature-index">0{index + 1}</span><span className="feature-level">{item.level}</span></div>
+        <div className="featured-visual"><MiniGraph variant={index}/></div>
+        <h3>{item.name}</h3><p>{item.summary}</p>
+        <div className="feature-bottom"><span>{item.complexity}</span><b>Explore lesson ↗</b></div>
+      </button>)}</div>
+    </section>
+
+    <section className="lab-spotlight">
+      <div className="spotlight-copy"><div className="eyebrow"><span className="pulse-dot"/> EXPERIMENT, DON'T JUST READ</div><h2>Make a graph.<br/><em>Watch it think.</em></h2><p>Add vertices, draw edges, change weights, then step through BFS, DFS, shortest paths, spanning trees, and topological sorting. Inspect the queue, stack, priority queue, distances, and every important decision.</p><button className="primary-btn" onClick={() => onNavigate('visualizer')}>Launch interactive lab <span>↗</span></button></div>
+      <div className="spotlight-art"><MiniGraph variant={4}/><div className="spotlight-chip chip-left">QUEUE <b>A · B · C</b></div><div className="spotlight-chip chip-right">VISITED <b>04 / 07</b></div><div className="spotlight-grid"/></div>
+    </section>
   </div>;
 }
 
-function Lesson({item,completed,onToggle,onBack,onVisualize}) {
-  const [tab,setTab]=useState('overview'); const [copied,setCopied]=useState(false);
-  const copy=async()=>{try{await navigator.clipboard.writeText(item.code||'');setCopied(true);setTimeout(()=>setCopied(false),1600);}catch{setCopied(false);}};
-  const group=algorithmGroups.find(g=>g.id===item.group);
-  return <div className="content-wrap lesson-wrap"><button className="back-link" onClick={onBack}>← BACK TO LIBRARY</button><div className="lesson-header"><div><div className="eyebrow">{group?.title.toUpperCase()} / {item.tag.toUpperCase()}</div><h1>{item.name}</h1><p>{item.summary}</p><div className="lesson-meta"><span className="level-pill">{item.level}</span><span className="complexity-pill">◷ {item.complexity}</span></div></div><div className="lesson-header-actions"><button className="outline-btn" onClick={onVisualize}>⌘ Open visualizer</button><button className={completed?'complete-btn done':'complete-btn'} onClick={onToggle}>{completed?'✓ Completed':'＋ Mark complete'}</button></div></div>
-    <div className="lesson-tabs"><button className={tab==='overview'?'selected':''} onClick={()=>setTab('overview')}>Overview</button><button className={tab==='code'?'selected':''} onClick={()=>setTab('code')}>C++ implementation</button><button className={tab==='practice'?'selected':''} onClick={()=>setTab('practice')}>Application & pitfalls</button></div>
-    {tab==='overview'&&<div className="lesson-layout"><div className="lesson-main"><section className="lesson-section"><div className="section-kicker"><span>01</span> THE CORE IDEA</div><h2>What is happening?</h2><p>{item.idea}</p></section><section className="lesson-section"><div className="section-kicker"><span>02</span> ALGORITHM WALKTHROUGH</div><h2>How it works</h2><ol className="walkthrough-list">{item.how.map((s,i)=><li key={i}><span>{String(i+1).padStart(2,'0')}</span><p>{s}</p></li>)}</ol></section><section className="lesson-section"><div className="section-kicker"><span>03</span> A REAL-WORLD CONNECTION</div><h2>Think of it this way</h2><div className="real-example"><div className="example-icon">↗</div><div><span>REAL-LIFE MODEL</span><p>{item.example}</p></div></div></section><section className="lesson-section"><div className="section-kicker"><span>04</span> WHERE IT IS USEFUL</div><h2>Applications</h2><div className="application-grid">{item.applications.map(x=><div key={x}><span>↗</span>{x}</div>)}</div></section></div><aside className="lesson-aside"><div className="quick-facts"><div className="eyebrow">AT A GLANCE</div><div className="fact-row"><span>Difficulty</span><b>{item.level}</b></div><div className="fact-row"><span>Category</span><b>{group?.title}</b></div><div className="fact-row"><span>Complexity</span><b>{item.complexity}</b></div><div className="fact-row"><span>Code standard</span><b>C++17</b></div></div><div className="aside-note"><div className="eyebrow">MENTAL MODEL</div><p>{item.name.toLowerCase().includes('dijkstra')?'Always expand the currently cheapest unsettled vertex; non-negative weights make its distance final.':item.name.toLowerCase().includes('bfs')?'The queue preserves layer order: every vertex at distance d is processed before distance d+1.':item.name.toLowerCase().includes('dfs')?'The call stack records the current exploration path; finishing a call is as meaningful as entering it.':'Focus on the invariant: what does the algorithm guarantee after each step?'}</p></div><button className="aside-visual-btn" onClick={onVisualize}>Explore in visual lab <span>↗</span></button></aside></div>}
-    {tab==='code'&&<div className="code-page"><div className="code-intro"><div><div className="eyebrow">IMPLEMENTATION REFERENCE</div><h2>C++17 template</h2><p>This is an educational implementation pattern. Adapt input parsing, indexing, limits, and return values to the exact problem statement.</p></div><button className="copy-btn" onClick={copy}>{copied?'✓ Copied':'▣ Copy code'}</button></div><div className="code-window"><div className="code-window-top"><span><i/> C++ / GRAPH ALGORITHM</span><span>STANDARD C++17</span></div><pre><code>{item.code || '// Implementation notes coming soon.'}</code></pre></div><div className="code-tip"><b>Implementation checklist</b><span>Check the vertex indexing (0-based or 1-based), constraints, integer overflow, disconnected components, and edge direction before submitting.</span></div></div>}
-    {tab==='practice'&&<div className="lesson-layout"><div className="lesson-main"><section className="lesson-section"><div className="section-kicker"><span>01</span> WHEN TO REACH FOR IT</div><h2>Recognize the pattern</h2><p>{item.example}</p><div className="application-grid">{item.applications.map(x=><div key={x}><span>✳</span>{x}</div>)}</div></section><section className="lesson-section"><div className="section-kicker"><span>02</span> COMMON MISTAKES</div><h2>Things to watch for</h2><ul className="pitfall-list">{item.pitfalls.map(x=><li key={x}>{x}</li>)}</ul></section><section className="lesson-section"><div className="section-kicker"><span>03</span> COMPLEXITY</div><h2>What the bound tells you</h2><p>{item.complexity}. The practical runtime also depends on the graph representation, data structures, and input constraints. Always estimate both time and memory before choosing an approach.</p></section></div><aside className="lesson-aside"><div className="quick-facts"><div className="eyebrow">PROBLEM-SOLVING CHECK</div><p>Before coding, ask yourself:</p><ul className="check-list"><li>Is the graph directed?</li><li>Are edge weights present?</li><li>Can weights be negative?</li><li>Is the graph connected?</li><li>Do I need one source or all pairs?</li></ul></div><div className="aside-note"><div className="eyebrow">SOURCE NOTE</div><p>{item.source || 'This lesson is an original educational synthesis based on the references listed in the References section.'}</p></div></aside></div>}
-    <div className="lesson-footer-nav"><button className="text-btn" onClick={onBack}>← All algorithms</button><button className="primary-btn" onClick={onVisualize}>Try the visualizer <span>↗</span></button></div>
+function MiniGraph({ variant = 0 }) {
+  const points = [[32, 45], [104, 16], [158, 64], [88, 108], [190, 118], [234, 45]];
+  const links = [[0,1],[1,2],[0,3],[3,2],[2,4],[2,5],[4,5],[1,3]];
+  return <svg viewBox="0 0 260 140" aria-hidden="true" className={`mini-graph mini-graph-${variant}`}>
+    <g>{links.map(([a,b], index) => <line key={index} x1={points[a][0]} y1={points[a][1]} x2={points[b][0]} y2={points[b][1]} className={index === variant + 1 ? 'mini-edge active' : 'mini-edge'}/>)}</g>
+    <g>{points.map(([x,y], index) => <g key={index} className={`mini-node n-${index}`}><circle cx={x} cy={y} r={index === variant ? 8 : 5.5}/><circle cx={x} cy={y} r={index === variant ? 14 : 9} className="mini-node-halo"/></g>)}</g>
+  </svg>;
+}
+
+function Library({ search, setSearch, activeGroup, setActiveGroup, items, completed, onOpen }) {
+  return <div className="content-wrap library-wrap">
+    <PageHeading eyebrow="THE TOPIC EXPLORER" title="Find the right graph idea." description="Search the complete topic collection. Lessons connect intuition, a reliable procedure, complexity, practical use, common pitfalls, and C++17 examples."><span className="heading-count">{items.length} / {algorithms.length} TOPICS</span></PageHeading>
+    <div className="library-discovery"><div className="library-search"><span>⌕</span><input aria-label="Search graph lessons" placeholder="Search by algorithm, concept, or application…" value={search} onChange={event => setSearch(event.target.value)}/>{search && <button type="button" aria-label="Clear search" onClick={() => setSearch('')}>×</button>}</div><div className="library-hint"><kbd>CTRL K</kbd> TO SEARCH FROM ANYWHERE</div></div>
+    <div className="category-filter" aria-label="Filter by category"><button className={activeGroup === 'all' ? 'selected' : ''} onClick={() => setActiveGroup('all')}>All topics <span>{algorithms.length}</span></button>{algorithmGroups.map(group => <button className={activeGroup === group.id ? 'selected' : ''} key={group.id} onClick={() => setActiveGroup(group.id)}>{group.title}<span>{algorithms.filter(item => item.group === group.id).length}</span></button>)}</div>
+    {algorithmGroups.filter(group => activeGroup === 'all' || group.id === activeGroup).map(group => {
+      const groupItems = items.filter(item => item.group === group.id);
+      if (!groupItems.length) return null;
+      return <section className="library-section" key={group.id}>
+        <div className="library-group-heading"><div><span className="eyebrow">{group.title.toUpperCase()}</span><p>{group.desc}</p></div><span className="group-count">{String(groupItems.length).padStart(2, '0')} TOPICS</span></div>
+        <div className="algorithm-grid">{groupItems.map((item, index) => <button className={`algorithm-card card-tone-${index % 4}`} key={item.id} onClick={() => onOpen(item.id)}>
+          <div className="algorithm-card-top"><span className="algorithm-symbol">{String(index + 1).padStart(2, '0')}</span><span className="level-pill">{item.level}</span></div>
+          <h3>{item.name}</h3><p>{item.summary}</p>
+          <div className="algorithm-card-bottom"><span>{item.complexity}</span><b className={completed.includes(item.id) ? 'is-complete' : ''}>{completed.includes(item.id) ? '✓ COMPLETE' : 'OPEN LESSON ↗'}</b></div>
+        </button>)}</div>
+      </section>;
+    })}
+    {!items.length && <div className="empty-state"><span>⌕</span><h3>No matching topics</h3><p>Try a broader keyword or remove the category filter.</p><button className="subtle-btn" onClick={() => { setSearch(''); setActiveGroup('all'); }}>Clear filters</button></div>}
   </div>;
+}
+
+function Lesson({ item, completed, onToggle, onBack, onVisualize }) {
+  const [tab, setTab] = useState('overview');
+  const [copied, setCopied] = useState(false);
+  const group = algorithmGroups.find(value => value.id === item.group);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(item.code || '');
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
+  };
+  return <div className="content-wrap lesson-wrap">
+    <button className="back-link" onClick={onBack}>← ALL TOPICS</button>
+    <section className="lesson-hero">
+      <div className="lesson-hero-copy"><div className="eyebrow">{group?.title.toUpperCase()} <span>/</span> {item.tag.toUpperCase()}</div><h1>{item.name}</h1><p>{item.summary}</p><div className="lesson-meta"><span className="level-pill">{item.level}</span><span className="complexity-pill">◷ {item.complexity}</span></div></div>
+      <div className="lesson-hero-visual"><div className="lesson-orbit orbit-one"/><div className="lesson-orbit orbit-two"/><MiniGraph variant={2}/><span>GRAPH THEORY / LESSON</span></div>
+    </section>
+    <div className="lesson-action-row"><div className="lesson-tabs" role="tablist" aria-label="Lesson sections"><button role="tab" aria-selected={tab === 'overview'} className={tab === 'overview' ? 'selected' : ''} onClick={() => setTab('overview')}>01 <span>Understand</span></button><button role="tab" aria-selected={tab === 'code'} className={tab === 'code' ? 'selected' : ''} onClick={() => setTab('code')}>02 <span>Implement</span></button><button role="tab" aria-selected={tab === 'practice'} className={tab === 'practice' ? 'selected' : ''} onClick={() => setTab('practice')}>03 <span>Apply & avoid errors</span></button></div><div className="lesson-header-actions"><button className="outline-btn" onClick={onVisualize}>◎ Try in graph lab</button><button className={completed ? 'complete-btn done' : 'complete-btn'} onClick={onToggle}>{completed ? '✓ Completed' : '＋ Mark complete'}</button></div></div>
+    {tab === 'overview' && <div className="lesson-layout"><div className="lesson-main">
+      <section className="lesson-section"><div className="section-kicker"><span>01</span> THE CORE IDEA</div><h2>What is happening?</h2><p>{item.idea}</p></section>
+      <section className="lesson-section"><div className="section-kicker"><span>02</span> ALGORITHM WALKTHROUGH</div><h2>Follow the logic.</h2><ol className="walkthrough-list">{item.how.map((line, index) => <li key={index}><span>{String(index + 1).padStart(2, '0')}</span><p>{line}</p></li>)}</ol></section>
+      <section className="lesson-section"><div className="section-kicker"><span>03</span> BUILD THE INTUITION</div><h2>Think of it in the real world.</h2><div className="real-example"><div className="example-icon">↗</div><div><span>REAL-LIFE MODEL</span><p>{item.example}</p></div></div></section>
+      <section className="lesson-section"><div className="section-kicker"><span>04</span> WHERE IT APPEARS</div><h2>Applications.</h2><div className="application-grid">{item.applications.map(value => <div key={value}><span>↗</span>{value}</div>)}</div></section>
+    </div><LessonAside item={item} group={group} onVisualize={onVisualize}/></div>}
+    {tab === 'code' && <div className="code-page"><div className="code-intro"><div><div className="eyebrow">IMPLEMENTATION REFERENCE</div><h2>C++17 template</h2><p>Use this as a starting point, then adapt input parsing, indexing, limits, and return values to the exact problem statement.</p></div><button className="copy-btn" onClick={copy}>{copied ? '✓ Copied' : '▣ Copy code'}</button></div><div className="code-window"><div className="code-window-top"><span><i/> C++ / GRAPH ALGORITHM</span><span>STANDARD C++17</span></div><pre><code>{item.code || '// Implementation outline coming soon.'}</code></pre></div><div className="code-tip"><b>Before you submit</b><span>Check indexing, integer overflow, graph direction, disconnected components, and whether the constraints fit the complexity.</span></div></div>}
+    {tab === 'practice' && <div className="lesson-layout"><div className="lesson-main"><section className="lesson-section"><div className="section-kicker"><span>01</span> RECOGNIZE THE PATTERN</div><h2>When should you reach for it?</h2><p>{item.example}</p><div className="application-grid">{item.applications.map(value => <div key={value}><span>✳</span>{value}</div>)}</div></section><section className="lesson-section"><div className="section-kicker"><span>02</span> COMMON PITFALLS</div><h2>Protect your solution from mistakes.</h2><ul className="pitfall-list">{item.pitfalls.map(value => <li key={value}>{value}</li>)}</ul></section><section className="lesson-section"><div className="section-kicker"><span>03</span> COMPLEXITY</div><h2>Read the bound in context.</h2><p><strong>{item.complexity}.</strong> Practical performance also depends on the graph representation, chosen data structures, and input limits. Estimate both time and memory before implementation.</p></section></div><aside className="lesson-aside"><div className="quick-facts"><div className="eyebrow">PROBLEM CHECKLIST</div><p>Before coding, ask:</p><ul className="check-list"><li>Is the graph directed?</li><li>Are edge weights present?</li><li>Can a weight be negative?</li><li>Can the graph be disconnected?</li><li>Do I need one source or all pairs?</li></ul></div><div className="aside-note"><div className="eyebrow">SOURCE NOTE</div><p>{item.source || 'This lesson is an original educational synthesis. See Further Reading for deeper proofs and alternate implementations.'}</p></div></aside></div>}
+    <div className="lesson-footer-nav"><button className="text-btn" onClick={onBack}>← Back to topic explorer</button><button className="primary-btn" onClick={onVisualize}>Open visual trace <span>↗</span></button></div>
+  </div>;
+}
+
+function LessonAside({ item, group, onVisualize }) {
+  const model = item.id === 'dijkstra' ? 'Always expand the currently cheapest unsettled vertex. Non-negative weights make that distance final.' : item.id === 'bfs' ? 'The queue preserves layer order: every vertex at distance d is processed before distance d + 1.' : item.id === 'dfs' ? 'The call stack is the current path. Finishing a call is just as important as entering one.' : item.id === 'kruskal' ? 'An edge is safe only when it joins two different components. DSU makes that check efficient.' : 'State the invariant: what does the algorithm guarantee after each step?';
+  return <aside className="lesson-aside"><div className="quick-facts"><div className="eyebrow">AT A GLANCE</div><div className="fact-row"><span>Difficulty</span><b>{item.level}</b></div><div className="fact-row"><span>Category</span><b>{group?.title}</b></div><div className="fact-row"><span>Complexity</span><b>{item.complexity}</b></div><div className="fact-row"><span>Code standard</span><b>C++17</b></div></div><div className="aside-note"><div className="eyebrow">THE MENTAL MODEL</div><p>{model}</p></div><button className="aside-visual-btn" onClick={onVisualize}>See it in the graph lab <span>↗</span></button></aside>;
 }
 
 function buildDisplayedPath(parent, start, target, nodeCount) {
@@ -732,27 +935,38 @@ function labelsOfSafe(indices, nodes) {
   return indices.map(index => nodes.find(node => node.id === index)?.label ?? String(index)).join(' · ');
 }
 
-const roadmapLessonIds = {
-  'Graph fundamentals':'graph-model', 'Graph representations':'representations', 'BFS':'bfs', 'DFS':'dfs',
-  'Connected components':'connected-components', 'Cycle detection':'cycle-detection', 'Grid BFS':'grid-bfs',
-  'Multi-source BFS':'multi-bfs', 'Topological sorting (Kahn)':'topological', 'Shortest paths in a DAG':'dag-shortest',
-  'Dijkstra shortest paths':'dijkstra', '0–1 BFS':'zero-one-bfs', 'Bellman–Ford':'bellman-ford',
-  'Disjoint Set Union (Union–Find)':'dsu', 'Kruskal minimum spanning tree':'kruskal',
-  'Prim minimum spanning tree':'prim', 'Bridges (cut edges)':'bridges', 'Articulation points':'articulation',
-  'Bipartite graph checking':'bipartite', 'Strongly connected components (Kosaraju)':'scc',
-  'Tarjan SCC algorithm':'tarjan-scc', 'Floyd–Warshall':'floyd-warshall', 'Johnson’s all-pairs algorithm':'johnson',
-  'Lowest common ancestor (binary lifting)':'lca', 'Tree diameter and center':'tree-diameter',
-  'Bipartite matching (augmenting paths)':'matching', 'Eulerian path and circuit':'eulerian',
-  'Dinic maximum flow':'dinic', 'Minimum cut and max-flow min-cut theorem':'min-cut',
-  '2-SAT (implication graph)':'two-sat', 'Tree dynamic programming':'tree-dp',
-  'Centroid decomposition':'centroid', 'Heavy-light decomposition':'hld',
-  'Traveling Salesperson Problem (bitmask DP)':'tsp'
-};
-
-function Roadmap({completed,onOpen}) {
-  return <div className="content-wrap"><PageHeading eyebrow="A STRUCTURED ROUTE" title="Learning path" description="A suggested order for building graph intuition. You can move at your own pace and jump between topics whenever a problem demands it."><span className="heading-count">5 STAGES</span></PageHeading><div className="roadmap-intro"><div className="roadmap-icon">⌁</div><div><b>From first principles to advanced graph techniques</b><p>Start with representation and traversal. Then learn paths, connectivity, trees, and optimization. The sequence is a recommendation, not a prerequisite lock.</p></div></div><div className="roadmap-stages">{roadmap.map(stage=><section className="roadmap-stage" key={stage.stage}><div className="stage-marker">{stage.stage}</div><div className="stage-content"><div className="stage-heading"><div><h2>{stage.title}</h2><p>{stage.subtitle}</p></div><span>{stage.items.filter(x=>{const id=roadmapLessonIds[x];return id&&completed.includes(id)}).length}/{stage.items.length} COMPLETE</span></div><div className="stage-items">{stage.items.map((name,i)=>{const id=roadmapLessonIds[name];const a=algorithms.find(x=>x.id===id);const done=a&&completed.includes(a.id);return <button key={name} className="roadmap-item" onClick={()=>a&&onOpen(a.id)} disabled={!a}><span className={done?'road-check checked':'road-check'}>{done?'✓':String(i+1).padStart(2,'0')}</span><b>{name}</b><span className="road-open">{a?'↗':'COMING UP'}</span></button>})}</div></div></section>)}</div></div>;
+function Roadmap({ completed, onOpen }) {
+  return <div className="content-wrap roadmap-wrap">
+    <PageHeading eyebrow="THE GUIDED ROUTE" title="A path through graph theory." description="A sequence designed to build intuition in layers. Learn the foundations, practice the core algorithms, then branch into advanced techniques when you need them."><span className="heading-count">5 STAGES · FLEXIBLE ORDER</span></PageHeading>
+    <div className="roadmap-banner"><div className="roadmap-banner-mark">⌁</div><div><span className="eyebrow">HOW TO USE THIS PATH</span><h2>Understand → recognize → implement.</h2><p>Every stage adds a new problem-solving tool. The full library stays open, so you can jump to any concept at any time.</p></div><div className="roadmap-banner-score"><b>{corePath.filter(item => completed.includes(item.id)).length}/{corePath.length}</b><span>CORE TOPICS</span></div></div>
+    <div className="roadmap-stages">{learningStages.map((stage, stageIndex) => {
+      const stageItems = stage.topics.map(id => algorithms.find(item => item.id === id)).filter(Boolean);
+      const done = stageItems.filter(item => completed.includes(item.id)).length;
+      return <section className="roadmap-stage" key={stage.number}>
+        <div className="stage-marker">{stage.number}</div>
+        <div className="stage-content"><div className="stage-heading"><div><span className="eyebrow">STAGE {stage.number}</span><h2>{stage.title}</h2><p>{stage.subtitle}</p></div><span className="stage-completion">{done}/{stageItems.length} COMPLETE</span></div>
+          <div className="stage-note">{stage.note}</div>
+          <div className="stage-items">{stage.topics.map((id, index) => {
+            const item = algorithms.find(value => value.id === id);
+            if (!item) return null;
+            const isDone = completed.includes(item.id);
+            return <button key={id} className={`roadmap-item ${isDone ? 'is-done' : ''}`} onClick={() => onOpen(id)}><span className="road-check">{isDone ? '✓' : String(index + 1).padStart(2, '0')}</span><span className="roadmap-item-copy"><b>{item.name}</b><small>{item.complexity}</small></span><span className="road-open">{isDone ? 'REVISIT' : 'OPEN'} ↗</span></button>;
+          })}</div>
+        </div>
+      </section>;
+    })}</div>
+    <div className="roadmap-next"><div><div className="eyebrow">WHEN YOU ARE READY</div><h2>Go beyond the core path.</h2><p>Explore strongly connected components, bridges, flow networks, matching, tree queries, and advanced contest techniques.</p></div><button className="primary-btn" onClick={() => onOpen('scc')}>Explore an advanced topic <span>↗</span></button></div>
+  </div>;
 }
-function Glossary() { const [q,setQ]=useState('');const list=glossary.filter(([a,b])=>`${a} ${b}`.toLowerCase().includes(q.toLowerCase()));return <div className="content-wrap"><PageHeading eyebrow="THE LANGUAGE OF GRAPHS" title="Graph glossary" description="A compact dictionary for the terminology that appears throughout graph problems."/><label className="library-search glossary-search"><span>⌕</span><input placeholder="Search a term…" value={q} onChange={e=>setQ(e.target.value)}/></label><div className="glossary-grid">{list.map(([term,desc])=><article className="glossary-card" key={term}><div className="glossary-letter">{term[0].toUpperCase()}</div><div><h3>{term}</h3><p>{desc}</p></div></article>)}</div>{!list.length&&<div className="empty-state">No matching terms.</div>}</div>; }
-function Resources() { return <div className="content-wrap"><PageHeading eyebrow="FURTHER READING" title="References & resources" description="Graph Atlas is a curated educational compilation. These external resources were used to cross-check topic coverage, terminology, algorithm invariants, and implementation patterns."/><div className="resource-callout"><span>ⓘ</span><p><b>Attribution note.</b> Explanations and examples on this site are rewritten as an original learning guide. C++ snippets are educational templates, not copied verbatim from one source. Follow the cited references for deeper proofs, variants, and edge-case discussions.</p></div><div className="resource-list">{resources.map((r,i)=><a className="resource-card" href={r.url} target="_blank" rel="noreferrer" key={r.name}><span className="resource-index">0{i+1}</span><div><span className="resource-type">{r.type}</span><h3>{r.name}</h3><p>{r.description}</p><span className="resource-url">{r.url.replace('https://','')} ↗</span></div><span className="resource-arrow">↗</span></a>)}</div><div className="citation-note"><div className="eyebrow">HOW TO USE THE REFERENCES</div><p><b>For proof and implementation details:</b> CP-Algorithms. <b>For guided competitive-programming practice:</b> USACO Guide. <b>For animation and intuition:</b> VisuAlgo and William Fiset’s video lessons. <b>For a broader software-library taxonomy:</b> Boost.Graph documentation.</p></div></div>; }
+
+function Glossary() {
+  const [query, setQuery] = useState('');
+  const entries = glossaryTerms.filter(([term, definition]) => `${term} ${definition}`.toLowerCase().includes(query.toLowerCase()));
+  return <div className="content-wrap glossary-wrap"><PageHeading eyebrow="THE LANGUAGE OF GRAPHS" title="Make the terminology familiar." description="A searchable reference for the words and ideas that appear in graph problems."/><label className="library-search glossary-search"><span>⌕</span><input placeholder="Search a graph term…" value={query} onChange={event => setQuery(event.target.value)}/></label><div className="glossary-count">{entries.length} TERMS FOUND</div><div className="glossary-grid">{entries.map(([term, definition], index) => <article className="glossary-card" key={term}><div className="glossary-letter">{String(index + 1).padStart(2, '0')}</div><div><h3>{term}</h3><p>{definition}</p></div></article>)}</div>{!entries.length && <div className="empty-state"><span>⌕</span><h3>No matching terms</h3><p>Try another keyword.</p></div>}</div>;
+}
+
+function Resources() {
+  return <div className="content-wrap resources-wrap"><PageHeading eyebrow="FURTHER READING" title="Go deeper than the atlas." description="Carefully selected references for proofs, implementation detail, guided practice, and interactive visual intuition."/><div className="resource-callout"><span>✦</span><p><b>How to use this collection.</b> Start with the lesson for intuition, then use these resources to study proofs, variants, constraints, and alternative implementations. Graph Atlas explanations are written as an original learning guide; code samples are educational templates.</p></div><div className="resource-list">{resources.map((resource, index) => <a className="resource-card" href={resource.url} target="_blank" rel="noreferrer" key={resource.name}><span className="resource-index">{String(index + 1).padStart(2, '0')}</span><div><span className="resource-type">{resource.type}</span><h3>{resource.name}</h3><p>{resource.description}</p><span className="resource-url">{resource.url.replace('https://', '')} ↗</span></div><span className="resource-arrow">↗</span></a>)}</div><div className="citation-note"><div className="eyebrow">A SUGGESTED STUDY LOOP</div><p><b>Understand the invariant.</b> Then inspect an implementation, test edge cases, and solve a problem without looking at the code. Return to the references when you need a proof or a more advanced variant.</p></div></div>;
+}
 
 export default App;
